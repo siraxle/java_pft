@@ -5,20 +5,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+
   ChromeDriver wd;
 
+  private AddNewHelper addNewHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
   public void init() {
-    System.setProperty("webdriver.chrome.driver", "/Volumes/Macintosh HD/программирование/JAVA/Для тестировщиков/javaCode/java_pft/chromedriver");
+    System.setProperty("webdriver.chrome.driver",
+            "/Volumes/Macintosh HD/программирование/JAVA/Для тестировщиков/javaCode/java_pft/chromedriver");
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
+    addNewHelper = new AddNewHelper(wd);
     sessionHelper.login("admin","secret");
   }
 
@@ -33,5 +37,9 @@ public class ApplicationManager {
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public AddNewHelper getAddNewHelper() {
+    return addNewHelper;
   }
 }

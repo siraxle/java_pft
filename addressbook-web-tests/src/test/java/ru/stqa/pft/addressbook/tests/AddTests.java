@@ -1,16 +1,13 @@
-import org.testng.annotations.BeforeMethod;
+package ru.stqa.pft.addressbook.tests;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 import java.util.concurrent.TimeUnit;
-import java.util.Date;
-import java.io.File;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
-import static org.openqa.selenium.OutputType.*;
 
 public class AddTests {
     FirefoxDriver wd;
@@ -28,6 +25,7 @@ public class AddTests {
         wd.findElement(By.name("pass")).sendKeys("\\undefined");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
         wd.findElement(By.linkText("add new")).click();
+       //fillFormAddNewPage
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys("Евгений");
@@ -60,6 +58,7 @@ public class AddTests {
         wd.findElement(By.name("notes")).click();
         wd.findElement(By.name("notes")).clear();
         wd.findElement(By.name("notes")).sendKeys("it is test");
+        //clickEnterOnAddNewPage
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
     
