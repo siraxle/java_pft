@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager extends SessionHelper{
+public class ApplicationManager {
 
   ChromeDriver wd;
   private SessionHelper sessionHelper;
@@ -43,5 +43,9 @@ public class ApplicationManager extends SessionHelper{
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public SessionHelper getSessionHelper() {
+    return sessionHelper;
   }
 }
