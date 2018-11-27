@@ -9,10 +9,7 @@ public class EditAddressBookTests extends TestBase {
   public void testAddContactToAddressBook(){
     app.getNavigationHelper().goToEditAddPage();
     app.getAddNewHelper().fillAddNew(new AddNewData("Евгений", "Ефремов", "Витальевич",
-            "axle", "9522448961", "sir.axle@yandex.ru", "1985", "it is test"));
+            "axle", "9522448961", "sir.axle@yandex.ru", "it is test"));
     app.getAddNewHelper().clickEnterOnAddNewPage();
-
   }
-
-
 }

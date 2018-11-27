@@ -7,17 +7,15 @@ public class AddNewData {
   private final String nickName;
   private final String mobile;
   private final String email;
-  private final String byear;
   private final String notes;
 
-  public AddNewData(String firstName, String middleName, String lastName, String nickName, String mobile, String email, String byear, String notes) {
+  public AddNewData(String firstName, String middleName, String lastName, String nickName, String mobile, String email, String notes) {
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
     this.nickName = nickName;
     this.mobile = mobile;
     this.email = email;
-    this.byear = byear;
     this.notes = notes;
   }
 
@@ -43,10 +41,6 @@ public class AddNewData {
 
   public String getEmail() {
     return email;
-  }
-
-  public String getByear() {
-    return byear;
   }
 
   public String getNotes() {
