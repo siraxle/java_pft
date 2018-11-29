@@ -7,7 +7,7 @@ public class DeleteContactFromAddressBookTests extends TestBase {
   @Test
   public void testDeleteContactFromAddressBook(){
     app.getNavigationHelper().goToHomePage();
-    app.getAddNewContactHelper().selectContact();
-    app.getAddNewContactHelper().deleteContacts();
+    app.getContactHelper().selectContact();
+    app.getContactHelper().deleteContacts();
   }
 }
