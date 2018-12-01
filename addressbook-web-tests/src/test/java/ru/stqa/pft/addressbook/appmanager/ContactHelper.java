@@ -33,8 +33,9 @@ public class ContactHelper extends HelperBase{
     type(By.name("notes"), contactData.getNotes());
   }
 
-  public void selectContact(){
-    click(By.name("selected[]"));
+  public void selectContact(int index){
+    wd.findElements(By.name("selected[]")).get(index).click();
+    //click(By.name("selected[]"));
   }
 
   public void deleteContacts(){

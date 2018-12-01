@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends HelperBase {
 
   public GroupHelper(ChromeDriver wd) {
     super(wd);
@@ -15,7 +15,7 @@ public class GroupHelper extends HelperBase{
   }
 
   public void submitGroupCreation() {
-    click( By.name("submit"));
+    click(By.name("submit"));
   }
 
   public void fillGroupForm(GroupData groupData) {
@@ -32,10 +32,9 @@ public class GroupHelper extends HelperBase{
     click(By.name("delete"));
   }
 
-  public void selectGroup() {
-      if (!wd.findElement(By.name("selected[]")).isSelected()) {
-        click(By.name("selected[]"));
-      }
+  public void selectGroup(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+    // click(By.name("selected[]"));
   }
 
   public void initGroupModification() {
@@ -48,7 +47,7 @@ public class GroupHelper extends HelperBase{
 
   public void createGroup(GroupData group) {
     initGroupCreation();
-    fillGroupForm(new GroupData("test1","test2" ,"test3"));
+    fillGroupForm(new GroupData("test1", "test2", "test3"));
     submitGroupCreation();
     returnToGroupPage();
   }
