@@ -17,7 +17,7 @@ public class ApplicationManager {
     System.setProperty("webdriver.chrome.driver",
             "/Volumes/Macintosh HD/программирование/JAVA/Для тестировщиков/javaCode/java_pft/chromedriver");
     wd = new ChromeDriver();
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);

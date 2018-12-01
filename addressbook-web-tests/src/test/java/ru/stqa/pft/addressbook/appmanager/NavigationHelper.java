@@ -19,7 +19,7 @@ public class NavigationHelper extends HelperBase{
     }
   }
 
-  public void goToEditAddPage(){
+  public void goToAddNewPage(){
     if (isElementPresent(By.name("update"))){
       return;
     } else {
