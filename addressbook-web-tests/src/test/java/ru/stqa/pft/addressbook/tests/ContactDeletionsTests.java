@@ -13,15 +13,18 @@ public class ContactDeletionsTests extends TestBase {
     app.getNavigationHelper().goToHomePage();
     if (! app.getContactHelper().isThereAContact()){
       app.getNavigationHelper().goToAddNewPage();
-      app.getContactHelper().createContact(new ContactData("Евгений", "Ефремов", "Витальевич",
-              "axle", "9522448961", "sir.axle@yandex.ru", "test1", "it is test"));
+      ContactData contact = new ContactData( null, null,
+              null, null, "sir.axle@yandex.ru", null, "it", null );
+      app.getContactHelper().createContact(contact);
     }
     app.getNavigationHelper().goToHomePage();
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(0);
+    app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().deleteContacts();
     app.getNavigationHelper().goToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(),before.size()-1);
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
   }
 }
