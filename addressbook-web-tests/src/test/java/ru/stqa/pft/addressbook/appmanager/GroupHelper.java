@@ -4,9 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -25,7 +28,11 @@ public class GroupHelper extends HelperBase {
   public void fillGroupForm(GroupData groupData) {
     type(By.name("group_name"), groupData.getName());
     type(By.name("group_header"), groupData.getHeader());
-    type(By.name("group_footer"), groupData.getFooter());
+    try {
+      type(By.name("group_footer"), groupData.getFooter());
+    } catch (NullPointerException e){
+      throw new IllegalStateException("In group footer field = NULL", e);
+    }
   }
 
   public void initGroupCreation() {
@@ -56,7 +63,7 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
-  public void delete(int index) {
+  public void delete(int index, GroupData group) {
     selectGroup(index);
     deleteSelectedGroups();
     returnToGroupPage();
@@ -78,9 +85,9 @@ public class GroupHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> list() {
-    List<GroupData> groups= new ArrayList <GroupData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+  public Groups all() {
+    Groups groups= new Groups();
+    List <WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements){
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
