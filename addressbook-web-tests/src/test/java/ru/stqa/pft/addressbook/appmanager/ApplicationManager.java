@@ -39,7 +39,7 @@ public class ApplicationManager {
     return navigationHelper;
   }
 
-  public ContactHelper getContactHelper() {
+  public ContactHelper getTo() {
     return contactHelper;
   }
 }

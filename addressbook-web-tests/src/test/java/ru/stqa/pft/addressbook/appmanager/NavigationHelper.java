@@ -19,7 +19,7 @@ public class NavigationHelper extends HelperBase{
     }
   }
 
-  public void goToContactPage(){
+  public void contactPage(){
     if (isElementPresent(By.name("update"))){
       return;
     } else {
