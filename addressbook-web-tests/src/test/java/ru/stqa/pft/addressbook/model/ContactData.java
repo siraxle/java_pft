@@ -37,6 +37,10 @@ public class ContactData {
     this.notes = notes;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public String getFirstName() {
     return firstName;
   }
@@ -67,6 +71,10 @@ public class ContactData {
 
   public String getGroup() {
     return group;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   @Override
