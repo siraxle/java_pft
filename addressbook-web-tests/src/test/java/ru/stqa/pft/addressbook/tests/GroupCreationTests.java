@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -25,5 +24,4 @@ public class GroupCreationTests extends TestBase {
     group.setId(max);
     Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
   }
-
 }
