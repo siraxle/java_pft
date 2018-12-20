@@ -22,7 +22,7 @@ public class ContactModificationTests extends TestBase {
     }
   }
 
-  @Test //(enabled = false)
+  @Test (enabled = false)
   public void testContactModification() {
     app.getTo().homePage();
     Set<ContactData> before = app.getTo().all();

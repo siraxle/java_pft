@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test //(enabled = false)
+  @Test (enabled = false)
   public void testContactCreation(){
     app.getTo().homePage();
     List<ContactData> before = app.getTo().list();
