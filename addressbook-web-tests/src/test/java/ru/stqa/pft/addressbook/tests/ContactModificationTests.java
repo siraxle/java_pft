@@ -5,8 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
@@ -22,16 +22,15 @@ public class ContactModificationTests extends TestBase {
     }
   }
 
-  @Test (enabled = false)
+  @Test //(enabled = false)
   public void testContactModification() {
     app.getTo().homePage();
-    List<ContactData> before = app.getTo().list();
-    int index = before.size() - 1;
-    app.getTo().selectContact(index);
-    app.getTo().initContactModification();
+    Set<ContactData> before = app.getTo().all();
+    ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withFirstName("first_name").withMiddleName("middle_name")
             .withLastName("last_name").withNickName("nick_name").withMobile("12345").withEmail("mail@mail.com").withGroup(null)
             .withNotes("qwerty");
+    app.getTo().modify(modifiedContact);
     app.getTo().fillContactForm(contact, false);
     app.getTo().submitContactModification();
     app.getTo().homePage();
@@ -41,11 +40,8 @@ public class ContactModificationTests extends TestBase {
     } catch (AssertionError e) {
       System.out.println("Модификатион не работает, сцука");
     }
-    before.remove(index);
+    before.remove(modifiedContact);
     before.add(contact);
-    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     try {
       Assert.assertEquals(before, after);
     } catch (AssertionError e) {

@@ -9,7 +9,7 @@ import java.util.Set;
 public class GroupCreationTests extends TestBase {
 
 
-  @Test //(enabled = false)
+  @Test (enabled = false)
   public void testGroupCreation() {
     app.goTo().groupPage();
     Set<GroupData> before = app.group().all();
