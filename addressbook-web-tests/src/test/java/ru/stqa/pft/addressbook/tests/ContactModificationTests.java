@@ -1,12 +1,16 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTests extends TestBase {
 
@@ -22,7 +26,7 @@ public class ContactModificationTests extends TestBase {
     }
   }
 
-  @Test (enabled = false)
+  @Test //(enabled = false)
   public void testContactModification() {
     app.getTo().homePage();
     Set<ContactData> before = app.getTo().all();
@@ -36,14 +40,13 @@ public class ContactModificationTests extends TestBase {
     app.getTo().homePage();
     List<ContactData> after = app.getTo().list();
     try {
-      Assert.assertEquals(after.size(), before.size());
+      assertEquals(after.size(), before.size());
     } catch (AssertionError e) {
       System.out.println("Модификатион не работает, сцука");
     }
     before.remove(modifiedContact);
-    before.add(contact);
     try {
-      Assert.assertEquals(before, after);
+      assertThat(after, equalTo(((Contacts) before).withAdded(contact)));
     } catch (AssertionError e) {
       System.out.println("Одна из коллекций пуста!!");
     }
