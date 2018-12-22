@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -17,9 +16,9 @@ public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePrecondition() {
     app.goTo().goToHomePage();
-    if (!app.getTo().isThereAContact()) {
+    if (!app.contact().isThereAContact()) {
       app.goTo().contactPage();
-      app.getTo().create(new ContactData()
+      app.contact().create(new ContactData()
               .withFirstName("Евгений").withLastName("Ефремов").withMiddleName("Витальевич")
               .withNickName("axle").withMobile("9522448961").withEmail("sir.axle@yandex.ru")
               .withGroup("test1").withNotes("it is test"));
@@ -28,20 +27,20 @@ public class ContactModificationTests extends TestBase {
 
   @Test //(enabled = false)
   public void testContactModification() {
-    app.getTo().homePage();
-    Set<ContactData> before = app.getTo().all();
+    app.contact().homePage();
+    Set<ContactData> before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withFirstName("first_name").withMiddleName("middle_name")
             .withLastName("last_name").withNickName("nick_name").withMobile("12345").withEmail("mail@mail.com").withGroup(null)
             .withNotes("qwerty");
-    app.getTo().modify(modifiedContact);
-    app.getTo().fillContactForm(contact, false);
-    app.getTo().submitContactModification();
-    app.getTo().contactCache = null;
-    app.getTo().homePage();
-    Set<ContactData> after = app.getTo().all();
+    app.contact().modify(modifiedContact);
+    app.contact().fillContactForm(contact, false);
+    app.contact().submitContactModification();
+    app.contact().contactCache = null;
+    app.contact().homePage();
+    Set<ContactData> after = app.contact().all();
     try {
-      assertEquals(after.size(), before.size());
+      assertThat(app.contact().count(), equalTo(before.size()));
     } catch (AssertionError e) {
       System.out.println("Модификатион не работает, сцука");
     }
@@ -52,5 +51,5 @@ public class ContactModificationTests extends TestBase {
       System.out.println("Одна из коллекций пуста!!");
     }
   }
-
+  
 }

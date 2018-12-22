@@ -8,10 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -43,6 +40,11 @@ public class ContactHelper extends HelperBase{
   public void selectContact(int index){
     wd.findElements(By.name("selected[]")).get(index).click();
   }
+
+  public int count(){
+   return wd.findElements(By.name("selected[]")).size();
+  }
+
 
   public void selectContactById(int id){
     wd.findElement(By.cssSelector("input[value='"+ id +"']" )).click();

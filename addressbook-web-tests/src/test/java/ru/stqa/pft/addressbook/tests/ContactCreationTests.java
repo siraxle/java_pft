@@ -11,17 +11,17 @@ public class ContactCreationTests extends TestBase {
 
   @Test //(enabled = false)
   public void testContactCreation(){
-    app.getTo().homePage();
-    Contacts before = app.getTo().all();
+    app.contact().homePage();
+    Contacts before = app.contact().all();
     app.goTo().contactPage();
     ContactData contact = new ContactData()
             .withFirstName("Евгений").withLastName("Ефремов").withMiddleName("Витальевич")
             .withNickName("axle").withMobile("9522448961").withEmail("sir.axle@yandex.ru")
             .withGroup("test1").withNotes("it is test");
-    app.getTo().create(contact);
-    app.getTo().homePage();
-    Contacts after = app.getTo().all();
-    assertThat(before.size() + 1, equalTo(after.size()));
+    app.contact().create(contact);
+    app.contact().homePage();
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
+    Contacts after = app.contact().all();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
