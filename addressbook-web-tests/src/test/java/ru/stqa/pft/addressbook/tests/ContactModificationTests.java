@@ -37,8 +37,9 @@ public class ContactModificationTests extends TestBase {
     app.getTo().modify(modifiedContact);
     app.getTo().fillContactForm(contact, false);
     app.getTo().submitContactModification();
+    app.getTo().contactCache = null;
     app.getTo().homePage();
-    List<ContactData> after = app.getTo().list();
+    Set<ContactData> after = app.getTo().all();
     try {
       assertEquals(after.size(), before.size());
     } catch (AssertionError e) {
