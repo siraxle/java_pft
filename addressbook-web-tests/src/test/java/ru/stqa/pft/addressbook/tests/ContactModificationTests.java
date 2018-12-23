@@ -9,7 +9,6 @@ import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTests extends TestBase {
 
@@ -20,8 +19,8 @@ public class ContactModificationTests extends TestBase {
       app.goTo().contactPage();
       app.contact().create(new ContactData()
               .withFirstName("Евгений").withLastName("Ефремов").withMiddleName("Витальевич")
-              .withNickName("axle").withMobile("9522448961").withEmail("sir.axle@yandex.ru")
-              .withGroup("test1").withNotes("it is test"));
+              .withNickName("axle").withMobilePhone("9522448961").withEmail("sir.axle@yandex.ru")
+              .withGroup("test1").withNotes("it is test").withHomePhone("4321").withWorkPhone("9876"));
     }
   }
 
@@ -31,8 +30,8 @@ public class ContactModificationTests extends TestBase {
     Set<ContactData> before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withFirstName("first_name").withMiddleName("middle_name")
-            .withLastName("last_name").withNickName("nick_name").withMobile("12345").withEmail("mail@mail.com").withGroup(null)
-            .withNotes("qwerty");
+            .withLastName("last_name").withNickName("nick_name").withMobilePhone("12345").withEmail("mail@mail.com").withGroup(null)
+            .withNotes("qwerty").withWorkPhone("1234").withMobilePhone("5678").withHomePhone("4321");
     app.contact().modify(modifiedContact);
     app.contact().fillContactForm(contact, false);
     app.contact().submitContactModification();
@@ -51,5 +50,5 @@ public class ContactModificationTests extends TestBase {
       System.out.println("Одна из коллекций пуста!!");
     }
   }
-  
+
 }
