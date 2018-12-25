@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactPhonTests extends TestBase {
-
+public class DetailsContactTests extends TestBase {
   @BeforeMethod
   public void ensurePrecondition() {
     app.goTo().goToHomePage();
@@ -23,13 +22,15 @@ public class ContactPhonTests extends TestBase {
               .withGroup("test1").withNotes("it is test").withMobilePhone("9522448961").withHomePhone("4321").withWorkPhone("9876"));
     }
   }
-
   @Test
-  public void testContactPhones() {
+  public void testDetailsContact(){
     app.goTo().goToHomePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+    ContactData contactDetails = app.contact().infoFromDetailPage(contact);
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getFirstName(), equalTo(contactDetails.getFirstName()));
+    assertThat(contact.getLastName(), equalTo(contactDetails.getLastName()));
   }
 
   private String mergePhones(ContactData contact) {

@@ -37,6 +37,7 @@ public class ContactHelper extends HelperBase{
 
     type(By.name("email"), contactData.getEmail());
     type(By.name("notes"), contactData.getNotes());
+    attach(By.name("photo"), contactData.getPhoto());
   }
 
   public void selectContact(int index){
@@ -69,7 +70,6 @@ public class ContactHelper extends HelperBase{
   }
 
   public void initContactModificationById(int id) {
-    //click(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[8]/a/img"));
     click(By.cssSelector(String.format("a[href='edit.php?id=%s']",id)));
   }
 
@@ -121,9 +121,26 @@ public class ContactHelper extends HelperBase{
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
-    return  contact = new ContactData().withId(contact.getId()).withFirstName(contact.getFirstName())
-            .withLastName(contact.getLastName()).withHomePhone(contact.getHomePhone()).withMobilePhone(contact.getMobilePhone())
-            .withWorkPhone(contact.getWorkPhone());
+    return  contact = new ContactData().withId(contact.getId()).withEmail(contact.getEmail()).withFirstName(firstName).withLastName(lastname).
+            withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
   }
 
+  public ContactData infoFromDetailPage(ContactData contact) {
+    initContactDetailsById(contact.getId());
+    String[] fio = wd.findElement(By.cssSelector("#content > b")).getText().split("\\s");
+    String email = wd.findElement(By.cssSelector("#content > a")).getText();
+    String[] info = wd.findElement(By.xpath("//*[@id=\"content\"]")).getText().split("\\n");
+    String[] home = info[3].split("\\s");
+    String homePhone = home[1];
+    String[] mobile = info[4].split("\\s");
+    String mobilePhone = mobile[1];
+    String[] work = info[5].split("\\s");
+    String workPhone = work[1];
+    return contact = new ContactData().withFirstName(fio[0]).withLastName(fio[2])
+            .withWorkPhone(workPhone).withMobilePhone(mobilePhone).withHomePhone(homePhone).withEmail(email);
+  }
+
+  private void initContactDetailsById(int id) {
+    click(By.cssSelector(String.format("a[href='view.php?id=%s']",id)));
+  }
 }
