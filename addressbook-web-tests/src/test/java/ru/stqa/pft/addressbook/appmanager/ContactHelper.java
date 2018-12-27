@@ -130,11 +130,11 @@ public class ContactHelper extends HelperBase{
     String[] fio = wd.findElement(By.cssSelector("#content > b")).getText().split("\\s");
     String email = wd.findElement(By.cssSelector("#content > a")).getText();
     String[] info = wd.findElement(By.xpath("//*[@id=\"content\"]")).getText().split("\\n");
-    String[] home = info[3].split("\\s");
+    String[] home = info[4].split("\\s");
     String homePhone = home[1];
-    String[] mobile = info[4].split("\\s");
+    String[] mobile = info[5].split("\\s");
     String mobilePhone = mobile[1];
-    String[] work = info[5].split("\\s");
+    String[] work = info[6].split("\\s");
     String workPhone = work[1];
     return contact = new ContactData().withFirstName(fio[0]).withLastName(fio[2])
             .withWorkPhone(workPhone).withMobilePhone(mobilePhone).withHomePhone(homePhone).withEmail(email);
