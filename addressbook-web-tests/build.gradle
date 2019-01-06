@@ -19,15 +19,14 @@ dependencies {
 task testGroups(type: Test) {
     useTestNG {
         suites 'src/test/recources/testng-groups.xml'
-        //dependsOn 'cleanTest'
+        dependsOn 'cleanTest'
     }
 }
 
 task testContacts(type: Test) {
     useTestNG {
         suites 'src/test/recources/testng-contacts.xml'
-       // dependsOn 'cleanTest'
-
+        dependsOn 'cleanTest'
     }
 
 }

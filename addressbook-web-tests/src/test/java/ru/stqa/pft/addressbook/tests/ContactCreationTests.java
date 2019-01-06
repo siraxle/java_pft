@@ -30,6 +30,9 @@ public class ContactCreationTests extends TestBase {
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
+
+
+
   @Test//(enabled = false)
   public void testCurrentDir() {
     File currentDir = new File(".");
