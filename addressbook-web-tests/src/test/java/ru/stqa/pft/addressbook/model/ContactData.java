@@ -33,7 +33,7 @@ public class ContactData {
   private String workPhone;
   @Expose
   private String allPhones;
- // @Expose
+  @Expose
   private File photo;
 
   public String getAllPhones() {
