@@ -1,0 +1,14 @@
+[
+  {
+    "firstName": "Евгений",
+    "middleName": "Витальевич",
+    "lastName": "Ефремов",
+    "nickName": "axle",
+    "email": "sir.axle@yandex.ru",
+    "group": "test1",
+    "notes": "it is test",
+    "homePhone": "1",
+    "mobilePhone": "2",
+    "workPhone": "3"
+  }
+]

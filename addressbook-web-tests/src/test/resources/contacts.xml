@@ -1,0 +1,15 @@
+<list>
+  <contact>
+    <firstName>Евгений</firstName>
+    <middleName>Витальевич</middleName>
+    <lastName>Ефремов</lastName>
+    <nickName>axle</nickName>
+    <email>sir.axle@yandex.ru</email>
+    <group>test1</group>
+    <notes>it is test</notes>
+    <homePhone>1</homePhone>
+    <mobilePhone>2</mobilePhone>
+    <workPhone>3</workPhone>
+    <photo>src/test/resources/file.jpg</photo>
+  </contact>
+</list>
