@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,18 +16,23 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactCreationTests extends TestBase {
 
     @DataProvider
-    public Iterator<Object[]> validContacts() {
+    public Iterator<Object[]> validContacts() throws IOException {
         List<Object[]> list = new ArrayList<Object[]>();
-        File photo1 = new File("src/test/resources/file.jpg");
-        File photo2 = new File("src/test/resources/monkey.png");
-        list.add(new Object[]{new ContactData().withFirstName("Ксения").withLastName("Тараканова").withMiddleName("Викторовна")
-                .withNickName("spring").withEmail("spring@mail.ru").withGroup("test2").withNotes("note1").withHomePhone("1234")
-                .withWorkPhone("4321").withMobilePhone("8765").withPhoto(photo2)});
-        list.add(new Object[]{new ContactData().withFirstName("Евгений").withLastName("Ефремов").withMiddleName("Витальевич")
-                .withNickName("axle").withEmail("axle@mail.ru").withGroup("test1").withNotes("note2").withHomePhone("1234")
-                .withWorkPhone("4321").withMobilePhone("8765").withPhoto(photo1)});
-        return list.iterator();
+        //File photo1 = new File("src/test/resources/file.jpg");
+        //File photo2 = new File("src/test/resources/monkey.png");
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")))){
+            String line = reader.readLine();
+            while (line != null){
+                String[] split = line.split(";");
+                list.add(new Object[]{new ContactData().withFirstName(split[0]).withLastName(split[1]).withMiddleName(split[2])
+                        .withNickName(split[3]).withEmail(split[4]).withGroup(split[5]).withNotes(split[6])
+                        .withHomePhone(split[7]).withMobilePhone(split[8]).withWorkPhone(split[9])
+                        .withPhoto(new File(split[10]))});
+            }
+            return list.iterator();
+        }
     }
+    
 
     @Test(dataProvider = "validContacts")//(enabled = false)
     public void testContactCreation(ContactData contact) {
