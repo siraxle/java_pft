@@ -17,3 +17,9 @@ gradle-app.setting
 out
 
 *.log
+contacts.csv
+contacts.json
+contacts.xml
+groups.csv
+groups.json
+groups.xml
