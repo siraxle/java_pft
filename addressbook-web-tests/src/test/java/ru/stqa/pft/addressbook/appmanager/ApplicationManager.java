@@ -12,10 +12,12 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
+  private DbHelper dBHelper;
 
   public void init() {
     System.setProperty("webdriver.chrome.driver",
             "/Volumes/Macintosh HD/программирование/JAVA/Для тестировщиков/javaCode/java_pft/chromedriver");
+    dBHelper = new DbHelper();
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
@@ -41,5 +43,9 @@ public class ApplicationManager {
 
   public ContactHelper contact() {
     return contactHelper;
+  }
+
+  public DbHelper db (){
+    return dBHelper;
   }
 }
