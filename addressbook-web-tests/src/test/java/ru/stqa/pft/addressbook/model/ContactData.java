@@ -3,11 +3,14 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -40,10 +43,6 @@ public class ContactData {
   private String email;
 
   @Expose
-  @Transient
-  private String group;
-
-  @Expose
   @Column(name = "notes")
   @Type(type = "text")
   private String notes;
@@ -67,6 +66,16 @@ public class ContactData {
   @Transient
   private String allPhones;
 
+  @Expose
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -78,11 +87,6 @@ public class ContactData {
             ", email='" + email + '\'' +
             '}';
   }
-
-  @Expose
-  @Column(name = "photo")
-  @Type(type = "text")
-  private String photo;
 
   public String getAllPhones() {
     return allPhones;
@@ -132,10 +136,6 @@ public class ContactData {
     return notes;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
   public ContactData withId(int id) {
     this.id = id;
     return this;
@@ -163,11 +163,6 @@ public class ContactData {
 
   public ContactData withEmail(String email) {
     this.email = email;
-    return this;
-  }
-
-  public ContactData withGroup(String group) {
-    this.group = group;
     return this;
   }
 
@@ -201,6 +196,10 @@ public class ContactData {
     return this;
   }
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -215,5 +214,10 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(id, firstName, middleName, lastName);
+  }
+
+  public ContactData inGroups(GroupData group) {
+    groups.add(group);
+    return this;
   }
 }

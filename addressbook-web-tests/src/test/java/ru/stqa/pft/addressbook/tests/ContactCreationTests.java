@@ -7,6 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class ContactCreationTests extends TestBase {
             while (line != null) {
                 String[] split = line.split(";");
                 list.add(new Object[]{new ContactData().withFirstName(split[0]).withLastName(split[1]).withMiddleName(split[2])
-                        .withNickName(split[3]).withEmail(split[4]).withGroup(split[5]).withNotes(split[6])
+                        .withNickName(split[3]).withEmail(split[4])
+                        //.withGroup(split[5])
+                        .withNotes(split[6])
                         .withHomePhone(split[7]).withMobilePhone(split[8]).withWorkPhone(split[9])
                         .withPhoto(new File(split[10]))});
                 line = reader.readLine();
@@ -72,13 +75,14 @@ public class ContactCreationTests extends TestBase {
 
     @Test(dataProvider = "validContactsJson")//(enabled = false)
     public void testContactCreation(ContactData contact) {
+        Groups groups = app.db().groups();
         app.contact().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.goTo().contactPage();
-        app.contact().create(contact);
+        app.contact().create(contact.inGroups(groups.iterator().next()));
         app.contact().homePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }

@@ -21,7 +21,8 @@ public class ContactModificationTests extends TestBase {
       app.contact().create(new ContactData()
               .withFirstName("Евгений").withLastName("Ефремов").withMiddleName("Витальевич")
               .withNickName("axle").withMobilePhone("9522448961").withEmail("sir.axle@yandex.ru")
-              .withGroup("test1").withNotes("it is test").withHomePhone("4321").withWorkPhone("9876")
+              //.withGroup("test1")
+              .withNotes("it is test").withHomePhone("4321").withWorkPhone("9876")
               .withPhoto(new File("src/test/resources/monkey.png")));
     }
   }
@@ -32,10 +33,10 @@ public class ContactModificationTests extends TestBase {
     Set<ContactData> before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withFirstName("first_name").withMiddleName("middle_name")
-            .withLastName("last_name").withNickName("nick_name").withMobilePhone("12345").withEmail("mail@mail.com").withGroup(null)
+            .withLastName("last_name").withNickName("nick_name").withMobilePhone("12345").withEmail("mail@mail.com")
+            //.withGroup(null)
             .withNotes("qwerty").withWorkPhone("1234").withMobilePhone("5678").withHomePhone("4321")
             .withPhoto(new File("src/test/resources/monkey.png"));
-   // app.goTo().contactPage();
     app.contact().modify(modifiedContact);
     app.contact().fillContactForm(contact, false);
     app.contact().submitContactModification();
@@ -53,6 +54,7 @@ public class ContactModificationTests extends TestBase {
     } catch (AssertionError e) {
       System.out.println("Одна из коллекций пуста!!");
     }
+    verifyContactListInUi();
   }
 
 }

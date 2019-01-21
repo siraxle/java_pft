@@ -5,24 +5,10 @@
     "lastName": "Ефремов",
     "nickName": "axle",
     "email": "sir.axle@yandex.ru",
-    "group": "test1",
     "notes": "it is test",
     "homePhone": "1",
     "mobilePhone": "2",
     "workPhone": "3",
-    "photo": {}
-  },
-  {
-    "firstName": "Евгений",
-    "middleName": "Витальевич",
-    "lastName": "Ефремов",
-    "nickName": "axle",
-    "email": "sir.axle@yandex.ru",
-    "group": "test1",
-    "notes": "it is test",
-    "homePhone": "1",
-    "mobilePhone": "2",
-    "workPhone": "3",
-    "photo": {}
+    "photo": "src/test/resources/file.jpg"
   }
 ]

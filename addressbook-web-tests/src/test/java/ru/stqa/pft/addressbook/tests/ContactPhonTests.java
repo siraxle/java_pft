@@ -20,7 +20,8 @@ public class ContactPhonTests extends TestBase {
       app.contact().create(new ContactData()
               .withFirstName("Евгений").withLastName("Ефремов").withMiddleName("Витальевич")
               .withNickName("axle").withEmail("sir.axle@yandex.ru")
-              .withGroup("test1").withNotes("it is test").withMobilePhone("9522448961").withHomePhone("4321").withWorkPhone("9876"));
+              //.withGroup("test1")
+              .withNotes("it is test").withMobilePhone("9522448961").withHomePhone("4321").withWorkPhone("9876"));
     }
   }
 
